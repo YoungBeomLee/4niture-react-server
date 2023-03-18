@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
-app.get("/product", (req, res) => {
+app.get("/products", (req, res) => {
   models.Product.findAll({
     order: [["createdAt", "ASC"]], //order 설정변경가능
     attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc", "createdAt"],
@@ -34,7 +34,7 @@ app.get("/product", (req, res) => {
     });
 });
 
-app.get("/product/:id", (req, res) => {
+app.get("/products/:id", (req, res) => {
   const params = req.params;
   const { id } = params;
   models.Product.findOne({
@@ -60,7 +60,7 @@ app.post("/image", upload.single("image"), (req, res) => {
   });
 });
 
-app.post("/product", (req, res) => {
+app.post("/products", (req, res) => {
   const body = req.body;
   const { name, price, category, imageUrl, size, desc } = body;
   if (!name || !price || !category || !imageUrl || !size || !desc) {
