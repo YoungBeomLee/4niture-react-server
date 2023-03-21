@@ -118,6 +118,30 @@ app.post("/products", (req, res) => {
   //res.send({ body });
 });
 
+//review upload page
+app.post("/review/upload", (req, res) => {
+  const body = req.body;
+  const { name, imageUrl ,desc} = body;
+  if (!name || !desc ) {
+    res.send("모든 필드를 입력해주세요");
+  }
+  models.Product.create({
+    name,
+    imageUrl,
+    desc,
+    
+  })
+    .then((result) => {
+      console.log("상품생성결과:", result);
+      res.send({ result });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send("상품 업로드에 문제가 발생했습니다.");
+    });
+  //res.send({ body });
+});
+
 app.listen(port, () => {
     console.log("🚩4niture의 쇼핑몰 서버가 돌아가고 있습니다");
     models.sequelize
