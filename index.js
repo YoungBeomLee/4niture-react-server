@@ -105,6 +105,8 @@ app.post("/products", (req, res) => {
     imageUrl,
     size,
     desc,
+    option,
+    soldout,
   })
     .then((result) => {
       console.log("상품생성결과:", result);
