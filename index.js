@@ -22,10 +22,9 @@ app.use("/uploads", express.static("uploads"));
 app.get("/products", (req, res) => {
   models.Product.findAll({
     order: [["createdAt", "DESC"]], //order 설정변경가능
-    attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc", "createdAt"],
+    attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc","type", "soldout", "createdAt"],
   })
     .then((result) => {
-      console.log("product 조회결과:", result);
       res.send({ products: result });
     })
     .catch((err) => {
@@ -33,6 +32,39 @@ app.get("/products", (req, res) => {
       res.send("에러발생");
     });
 });
+
+app.get("/products/new", (req, res) => {
+  models.Product.findAll({
+    where : {type : "new"},
+  })
+    .then((result) => {
+      console.log("조회결과:", result);
+      res.send({
+        product: result,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send("상품조회시 에러가 발생 했습니다.");
+    });
+});
+
+/* app.get("/products/best", (req, res) => {
+  models.Product.findAll({
+    limit: 4,
+  })
+    .then((result) => {
+      console.log("조회결과:", result);
+      res.send({
+        product: result,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send("상품조회시 에러가 발생 했습니다.");
+    });
+});
+ */
 
 app.get("/products/:id", (req, res) => {
   const params = req.params;
