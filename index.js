@@ -18,7 +18,7 @@ const upload = multer({
 app.use(express.json());
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
-
+//구매하기 해야함
 app.get("/products", (req, res) => {
   models.Product.findAll({
     order: [["createdAt", "DESC"]], //order 설정변경가능
@@ -49,9 +49,9 @@ app.get("/products/new", (req, res) => {
     });
 });
 
-/* app.get("/products/best", (req, res) => {
+app.get("/products/best", (req, res) => {
   models.Product.findAll({
-    limit: 4,
+    where : {option : "best"},
   })
     .then((result) => {
       console.log("조회결과:", result);
@@ -64,7 +64,6 @@ app.get("/products/new", (req, res) => {
       res.send("상품조회시 에러가 발생 했습니다.");
     });
 });
- */
 
 app.get("/products/:id", (req, res) => {
   const params = req.params;
@@ -91,11 +90,11 @@ app.post("/image", upload.single("image"), (req, res) => {
     imageUrl: file.path,
   });
 });
-
+//soldout 수정해야함 -> models allownull
 app.post("/products", (req, res) => {
   const body = req.body;
   const { name, price, category, imageUrl, size, desc, option, soldout } = body;
-  if (!name || !price || !category || !size || !desc) {
+  if (!name || !price || !category || !size || !desc ) {
     res.send("모든 필드를 입력해주세요");
   }
   models.Product.create({
