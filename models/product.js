@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       category: {
-        type: DataTypes.STRING(30),//integer로 수정할수도있음
-        allowNull: false,
+        type: DataTypes.STRING(30),//문자로
+        allowNull: false, 
       },
       imageUrl: {
         type: DataTypes.STRING(300),
@@ -24,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(300),
         allowNull: false,
       },
+      type: {
+        type: DataTypes.STRING(300),
+        allowNull: true,
+      },
+      
     });
     return product;
   };

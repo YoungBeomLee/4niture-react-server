@@ -21,7 +21,7 @@ app.use("/uploads", express.static("uploads"));
 
 app.get("/products", (req, res) => {
   models.Product.findAll({
-    order: [["createdAt", "ASC"]], //order 설정변경가능
+    order: [["createdAt", "DESC"]], //order 설정변경가능
     attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc", "createdAt"],
   })
     .then((result) => {
@@ -63,7 +63,7 @@ app.post("/image", upload.single("image"), (req, res) => {
 app.post("/products", (req, res) => {
   const body = req.body;
   const { name, price, category, imageUrl, size, desc } = body;
-  if (!name || !price || !category || !imageUrl || !size || !desc) {
+  if (!name || !price || !category || !size || !desc) {
     res.send("모든 필드를 입력해주세요");
   }
   models.Product.create({
