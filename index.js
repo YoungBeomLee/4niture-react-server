@@ -22,7 +22,7 @@ app.use("/uploads", express.static("uploads"));
 app.get("/products", (req, res) => {
   models.Product.findAll({
     order: [["createdAt", "DESC"]], //order 설정변경가능
-    attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc","type", "soldout", "createdAt"],
+    attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc","option", "soldout", "createdAt"],
   })
     .then((result) => {
       res.send({ products: result });
@@ -35,7 +35,7 @@ app.get("/products", (req, res) => {
 
 app.get("/products/new", (req, res) => {
   models.Product.findAll({
-    where : {type : "new"},
+    where : {option : "new"},
   })
     .then((result) => {
       console.log("조회결과:", result);
