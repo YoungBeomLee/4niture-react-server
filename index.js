@@ -94,7 +94,7 @@ app.post("/image", upload.single("image"), (req, res) => {
 
 app.post("/products", (req, res) => {
   const body = req.body;
-  const { name, price, category, imageUrl, size, desc } = body;
+  const { name, price, category, imageUrl, size, desc, option, soldout } = body;
   if (!name || !price || !category || !size || !desc) {
     res.send("모든 필드를 입력해주세요");
   }
