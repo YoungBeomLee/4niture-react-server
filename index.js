@@ -121,7 +121,7 @@ app.post("/products", (req, res) => {
 
 //review upload page
 
-app.post("/review/upload", (req, res) => {
+app.post("/reviews", (req, res) => {
   const body = req.body;
   const { name, imageUrl ,desc} = body;
   if (!name || !desc ) {
