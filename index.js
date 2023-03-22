@@ -120,13 +120,14 @@ app.post("/products", (req, res) => {
 });
 
 //review upload page
+
 app.post("/review/upload", (req, res) => {
   const body = req.body;
   const { name, imageUrl ,desc} = body;
   if (!name || !desc ) {
     res.send("모든 필드를 입력해주세요");
   }
-  models.Product.create({
+  models.Review.create({
     name,
     imageUrl,
     desc,
