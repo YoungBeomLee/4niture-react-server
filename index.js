@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 const models = require("./models");
 const multer = require("multer");
 
@@ -141,39 +141,20 @@ app.post("/products", (req, res) => {
 //review upload page
 app.get("/reviews", (req, res) => {
   models.Review.findAll({
-    order: [["createdAt", "DESC"]],
-    attributes: [ "name","imageUrl", "desc"],
+    limit: 3,
   })
     .then((result) => {
       res.send({ reviews: result });
     })
     .catch((err) => {
       console.error(err);
-      res.send("에러발생");
+      res.status(500).send("에러가 발생했습니다");
     });
 });
 
-app.post("/reviews", (req, res) => {
-  const body = req.body;
-  const { name, imageUrl, desc } = body;
-  if (!name || !desc) {
-    res.send("모든 필드를 입력해주세요");
-  }
-  models.Review.create({
-    name,
-    imageUrl,
-    desc,
-  })
-    .then((result) => {
-      console.log("상품생성결과:", result);
-      res.send({ result });
-    })
-    .catch((error) => {
-      console.error(error);
-      res.send("상품 업로드에 문제가 발생했습니다.");
-    });
+
   //res.send({ body });
-});
+
 
 app.listen(port, () => {
   console.log("🚩4niture의 쇼핑몰 서버가 돌아가고 있습니다");
