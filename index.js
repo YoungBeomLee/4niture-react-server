@@ -19,7 +19,7 @@ const upload = multer({
 app.use(express.json());
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
-app.use("/reviews", express.static("reviews"));
+
 //구매하기 해야함
 app.get("/products", (req, res) => {
   models.Product.findAll({
@@ -141,7 +141,7 @@ app.post("/products", (req, res) => {
 //review upload page
 app.get("/reviews", (req, res) => {
   models.Review.findAll({
-    limit: 3,
+    attributes: ["name", "imageUrl", "desc"   ],
   })
     .then((result) => {
       res.send({ reviews: result });
