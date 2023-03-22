@@ -19,6 +19,7 @@ const upload = multer({
 app.use(express.json());
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
+app.use("/reviews", express.static("reviews"));
 //구매하기 해야함
 app.get("/products", (req, res) => {
   models.Product.findAll({
@@ -120,6 +121,19 @@ app.post("/products", (req, res) => {
 });
 
 //review upload page
+app.get("/reviews", (req, res) => {
+  models.Review.findAll({
+    order: [["createdAt", "DESC"]],
+    attributes: [ "name","imageUrl", "desc"],
+  })
+    .then((result) => {
+      res.send({ reviews: result });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.send("에러발생");
+    });
+});
 
 app.post("/reviews", (req, res) => {
   const body = req.body;
