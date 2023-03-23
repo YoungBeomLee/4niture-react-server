@@ -8,7 +8,7 @@ const multer = require("multer");
 const upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "uploads/"); //이부분 경로 확인
+      cb(null, "uploads/"); 
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname);
@@ -27,7 +27,6 @@ app.get("/products", (req, res) => {
     attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc", "option", "soldout", "createdAt"],
   })
     .then((result) => {
-      console.log({products:result})
       res.send({ products: result });
     })
     .catch((err) => {
@@ -41,7 +40,6 @@ app.get("/products/new", (req, res) => {
     where: { option: "new" },
   })
     .then((result) => {
-      console.log("조회결과:", result);
       res.send({
         product: result,
       });
@@ -57,13 +55,11 @@ app.get("/products/best", (req, res) => {
     where: { option: "best" },
   })
     .then((result) => {
-      console.log("조회결과:", result);
       res.send({
         product: result,
       });
     })
     .catch((error) => {
-      console.error(error);
       res.send("상품조회시 에러가 발생 했습니다.");
     });
 });
@@ -75,7 +71,6 @@ app.get("/products/:id", (req, res) => {
     where: { id: id },
   })
     .then((result) => {
-      console.log("조회결과:", result);
       res.send({
         product: result,
       });
@@ -93,7 +88,6 @@ app.get("/products/category/:category", (req, res) => {
     where: { category: category },
   })
     .then((result) => {
-      console.log("조회결과:", result);
       res.send({
         product: result,
       });
@@ -106,7 +100,6 @@ app.get("/products/category/:category", (req, res) => {
 
 app.post("/image", upload.single("image"), (req, res) => {
   const file = req.file;
-  console.log(file);
   res.send({
     imageUrl: file.path,
   });
@@ -129,7 +122,6 @@ app.post("/products", (req, res) => {
     soldout,
   })
     .then((result) => {
-      console.log("상품생성결과:", result);
       res.send({ result });
     })
     .catch((error) => {
@@ -142,7 +134,7 @@ app.post("/products", (req, res) => {
 //review upload page
 app.get("/reviews", (req, res) => {
   models.Review.findAll({
-    attributes: ["name","productname", "imageUrl", "desc"  ],
+    attributes: ["name", "imageUrl", "desc"   ],
   })
     .then((result) => {
       res.send({ reviews: result });
@@ -151,30 +143,6 @@ app.get("/reviews", (req, res) => {
       console.error(err);
       res.status(500).send("에러가 발생했습니다");
     });
-});
-
-app.post("/reviews", (req, res) => {
-  const body = req.body;
-  const { name, productname,imageUrl, desc  } = body;
-  if (!name || !productname || !desc) {
-    res.send("모든 필드를 입력해주세요");
-  }
-  models.Review.create({
-    name,
-    productname,
-    imageUrl,
-    desc,
-   
-  })
-    .then((result) => {
-      console.log("상품생성결과:", result);
-      res.send({ result });
-    })
-    .catch((error) => {
-      console.error(error);
-      res.send("상품 업로드에 문제가 발생했습니다.");
-    });
-  //res.send({ body });
 });
 
 
