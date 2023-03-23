@@ -27,10 +27,6 @@ app.get("/products", (req, res) => {
     attributes: ["id", "name", "price", "category", "imageUrl", "subimageUrl", "size", "desc", "option", "soldout", "createdAt"],
   })
     .then((result) => {
-<<<<<<< HEAD
-=======
-      console.log({ products: result });
->>>>>>> 99d4f7b0805444f9408521d82683f413ae70149d
       res.send({ products: result });
     })
     .catch((err) => {
