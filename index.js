@@ -141,7 +141,7 @@ app.post("/products", (req, res) => {
 //review upload page
 app.get("/reviews", (req, res) => {
   models.Review.findAll({
-    attributes: ["name", "imageUrl", "desc"   ],
+    attributes: ["name","productname", "imageUrl", "desc"  ],
   })
     .then((result) => {
       res.send({ reviews: result });
