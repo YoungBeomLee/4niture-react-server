@@ -24,9 +24,13 @@ app.use("/uploads", express.static("uploads"));
 app.get("/products", (req, res) => {
   models.Product.findAll({
     order: [["createdAt", "DESC"]], //order 설정변경가능
-    attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc", "option", "soldout", "createdAt"],
+    attributes: ["id", "name", "price", "category", "imageUrl", "subimageUrl", "size", "desc", "option", "soldout", "createdAt"],
   })
     .then((result) => {
+<<<<<<< HEAD
+=======
+      console.log({ products: result });
+>>>>>>> 99d4f7b0805444f9408521d82683f413ae70149d
       res.send({ products: result });
     })
     .catch((err) => {
@@ -107,7 +111,7 @@ app.post("/image", upload.single("image"), (req, res) => {
 //soldout 수정해야함 -> models allownull
 app.post("/products", (req, res) => {
   const body = req.body;
-  const { name, price, category, imageUrl, size, desc, option, soldout } = body;
+  const { name, price, category, imageUrl, subimageUrl, size, desc, option, soldout } = body;
   if (!name || !price || !category || !size || !desc) {
     res.send("모든 필드를 입력해주세요");
   }
@@ -116,6 +120,7 @@ app.post("/products", (req, res) => {
     price,
     category,
     imageUrl,
+    subimageUrl,
     size,
     desc,
     option,
@@ -134,7 +139,7 @@ app.post("/products", (req, res) => {
 //review upload page
 app.get("/reviews", (req, res) => {
   models.Review.findAll({
-    attributes: ["name", "imageUrl", "desc"   ],
+    attributes: ["name", "productname", "imageUrl", "desc"],
   })
     .then((result) => {
       res.send({ reviews: result });
