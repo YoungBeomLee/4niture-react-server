@@ -24,10 +24,10 @@ app.use("/uploads", express.static("uploads"));
 app.get("/products", (req, res) => {
   models.Product.findAll({
     order: [["createdAt", "DESC"]], //order 설정변경가능
-    attributes: ["id", "name", "price", "category", "imageUrl", "size", "desc", "option", "soldout", "createdAt"],
+    attributes: ["id", "name", "price", "category", "imageUrl", "subimageUrl", "size", "desc", "option", "soldout", "createdAt"],
   })
     .then((result) => {
-      console.log({products:result})
+      console.log({ products: result });
       res.send({ products: result });
     })
     .catch((err) => {
@@ -114,7 +114,7 @@ app.post("/image", upload.single("image"), (req, res) => {
 //soldout 수정해야함 -> models allownull
 app.post("/products", (req, res) => {
   const body = req.body;
-  const { name, price, category, imageUrl, size, desc, option, soldout } = body;
+  const { name, price, category, imageUrl, subimageUrl, size, desc, option, soldout } = body;
   if (!name || !price || !category || !size || !desc) {
     res.send("모든 필드를 입력해주세요");
   }
@@ -123,6 +123,7 @@ app.post("/products", (req, res) => {
     price,
     category,
     imageUrl,
+    subimageUrl,
     size,
     desc,
     option,
@@ -142,7 +143,7 @@ app.post("/products", (req, res) => {
 //review upload page
 app.get("/reviews", (req, res) => {
   models.Review.findAll({
-    attributes: ["name","productname", "imageUrl", "desc"  ],
+    attributes: ["name", "productname", "imageUrl", "desc"],
   })
     .then((result) => {
       res.send({ reviews: result });
@@ -155,7 +156,7 @@ app.get("/reviews", (req, res) => {
 
 app.post("/reviews", (req, res) => {
   const body = req.body;
-  const { name, productname,imageUrl, desc  } = body;
+  const { name, productname, imageUrl, desc } = body;
   if (!name || !productname || !desc) {
     res.send("모든 필드를 입력해주세요");
   }
@@ -164,7 +165,6 @@ app.post("/reviews", (req, res) => {
     productname,
     imageUrl,
     desc,
-   
   })
     .then((result) => {
       console.log("상품생성결과:", result);
@@ -177,9 +177,7 @@ app.post("/reviews", (req, res) => {
   //res.send({ body });
 });
 
-
-  //res.send({ body });
-
+//res.send({ body });
 
 app.listen(port, () => {
   console.log("🚩4niture의 쇼핑몰 서버가 돌아가고 있습니다");
