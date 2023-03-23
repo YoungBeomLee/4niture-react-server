@@ -144,10 +144,24 @@ app.get("/reviews", (req, res) => {
       res.status(500).send("에러가 발생했습니다");
     });
 });
-
-
-  //res.send({ body });
-
+  
+app.post("/purchase/:id",(req,res) => {
+  const { id } = req.params;
+  models.Product.update({
+    soldout:1,
+  },{
+    where:{id},
+  })
+  .then((result) => {
+    res.send({
+      result:true,
+    })
+  })
+  .catch((error) => {
+    console.lerror(error);
+    res.status(500).send("상품구매에 실패했습니다.")
+  })
+})
 
 app.listen(port, () => {
   console.log("🚩4niture의 쇼핑몰 서버가 돌아가고 있습니다");
