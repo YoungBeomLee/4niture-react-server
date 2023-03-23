@@ -163,7 +163,7 @@ app.post("/purchase/:id",(req,res) => {
     })
   })
   .catch((error) => {
-    console.lerror(error);
+    console.error(error);
     res.status(500).send("상품구매에 실패했습니다.")
   })
 })
