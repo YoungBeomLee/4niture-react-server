@@ -152,6 +152,30 @@ app.get("/reviews", (req, res) => {
     });
 });
 
+app.post("/reviews", (req, res) => {
+  const body = req.body;
+  const { name, productname,imageUrl, desc  } = body;
+  if (!name || !productname || !desc) {
+    res.send("모든 필드를 입력해주세요");
+  }
+  models.Review.create({
+    name,
+    productname,
+    imageUrl,
+    desc,
+   
+  })
+    .then((result) => {
+      console.log("상품생성결과:", result);
+      res.send({ result });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send("상품 업로드에 문제가 발생했습니다.");
+    });
+  //res.send({ body });
+});
+
 
   //res.send({ body });
 
