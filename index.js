@@ -148,10 +148,10 @@ app.get("/reviews", (req, res) => {
 app.post("/reviews", (req, res) => {
   const body = req.body;
   const { name, productname, imageUrl,  desc  } = body;
-  if (!name || !price || !category || !size || !desc) {
+  if (!name || !productname  || !desc) {
     res.send("모든 필드를 입력해주세요");
   }
-  models.Product.create({
+  models.Review.create({
     name,
     productname,
     imageUrl,
