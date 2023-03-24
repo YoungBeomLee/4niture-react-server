@@ -71,6 +71,7 @@ app.get("/products/:id", (req, res) => {
     where: { id: id },
   })
     .then((result) => {
+      console.log(result)
       res.send({
         product: result,
       });
@@ -102,6 +103,7 @@ app.post("/image", upload.single("image"), (req, res) => {
   const file = req.file;
   res.send({
     imageUrl: file.path,
+    //
   });
 });
 //soldout 수정해야함 -> models allownull
