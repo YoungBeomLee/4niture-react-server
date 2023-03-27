@@ -8,7 +8,7 @@ const multer = require("multer");
 const upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "uploads/"); 
+      cb(null, "uploads/");
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname);
@@ -24,7 +24,7 @@ app.use("/uploads", express.static("uploads"));
 app.get("/products", (req, res) => {
   models.Product.findAll({
     order: [["createdAt", "DESC"]], //order 설정변경가능
-    attributes: ["id", "name", "price", "category", "imageUrl", "subimageUrl", "size", "desc", "option", "soldout", "createdAt"],
+    attributes: ["id", "name", "price", "category", "imageUrl", "subimageUrl", "subbimageUrl", "subbbimageUrl", "size", "desc", "option", "soldout", "createdAt"],
   })
     .then((result) => {
       res.send({ products: result });
@@ -71,7 +71,7 @@ app.get("/products/:id", (req, res) => {
     where: { id: id },
   })
     .then((result) => {
-      console.log(result)
+      console.log(result);
       res.send({
         product: result,
       });
@@ -109,7 +109,7 @@ app.post("/image", upload.single("image"), (req, res) => {
 //soldout 수정해야함 -> models allownull
 app.post("/products", (req, res) => {
   const body = req.body;
-  const { name, price, category, imageUrl, subimageUrl, size, desc, option, soldout } = body;
+  const { name, price, category, imageUrl, subimageUrl, subbimageUrl, subbbimageUrl, size, desc, option, soldout } = body;
   if (!name || !price || !category || !size || !desc) {
     res.send("모든 필드를 입력해주세요");
   }
@@ -119,6 +119,8 @@ app.post("/products", (req, res) => {
     category,
     imageUrl,
     subimageUrl,
+    subbimageUrl,
+    subbbimageUrl,
     size,
     desc,
     option,
@@ -149,15 +151,15 @@ app.get("/reviews", (req, res) => {
 });
 app.post("/reviews", (req, res) => {
   const body = req.body;
-  const { name, productname, imageUrl,  desc  } = body;
-  if (!name || !productname  || !desc) {
+  const { name, productname, imageUrl, desc } = body;
+  if (!name || !productname || !desc) {
     res.send("모든 필드를 입력해주세요");
   }
   models.Review.create({
     name,
     productname,
     imageUrl,
-    desc
+    desc,
   })
     .then((result) => {
       res.send({ result });
@@ -168,24 +170,27 @@ app.post("/reviews", (req, res) => {
     });
   //res.send({ body });
 });
-  
-app.post("/purchase/:id",(req,res) => {
+
+app.post("/purchase/:id", (req, res) => {
   const { id } = req.params;
-  models.Product.update({
-    soldout:1,
-  },{
-    where:{id},
-  })
-  .then((result) => {
-    res.send({
-      result:true,
+  models.Product.update(
+    {
+      soldout: 1,
+    },
+    {
+      where: { id },
+    }
+  )
+    .then((result) => {
+      res.send({
+        result: true,
+      });
     })
-  })
-  .catch((error) => {
-    console.error(error);
-    res.status(500).send("상품구매에 실패했습니다.")
-  })
-})
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("상품구매에 실패했습니다.");
+    });
+});
 
 app.listen(port, () => {
   console.log("🚩4niture의 쇼핑몰 서버가 돌아가고 있습니다");

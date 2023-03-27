@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(300),
       allowNull: true,
     },
+    subbimageUrl: {
+      type: DataTypes.STRING(300),
+      allowNull: true,
+    },
+    subbimageUrl: {
+      type: DataTypes.STRING(300),
+      allowNull: true,
+    },
     size: {
       type: DataTypes.STRING(300),
       allowNull: false,
