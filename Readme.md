@@ -63,12 +63,8 @@
 </br>
 
 ## Data Type : JSON
-
-    get : /products 상품 정보 조회
-    get : /products/id 상품 상세 페이지
-    get : /review/reviewpage 리뷰 페이지
-    post : /products/upload 상품 등록
-    post : /review/upload 리뷰 등록
+<img width="660" alt="image" src="uploads/apiTable.png">
+    
 
 [express-image]: https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white
 [pwa-image]: https://img.shields.io/badge/pwa-6109AC?style=for-the-badge&logo=pwa&logoColor=white
