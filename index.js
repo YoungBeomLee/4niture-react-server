@@ -101,12 +101,12 @@ app.get("/products/category/:category", (req, res) => {
 
 app.post("/image", upload.single("image"), (req, res) => {
   const file = req.file;
+  console.log(file);
   res.send({
     imageUrl: file.path,
-    //
   });
 });
-//soldout 수정해야함 -> models allownull
+
 app.post("/products", (req, res) => {
   const body = req.body;
   const { name, price, category, imageUrl, subimageUrl, subbimageUrl, subbbimageUrl, size, desc, option, soldout } = body;
