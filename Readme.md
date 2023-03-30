@@ -1,7 +1,7 @@
 # 가구 쇼핑몰 프로젝트
 
 <div align="center">
-<img width="329" alt="image" src="./uploads/logo.png">
+<img width="329" alt="image" src="https://user-images.githubusercontent.com/120350423/228405302-749b0572-6b64-4a6a-bb7b-d735ac759710.png">
 </div>
 
     PWA 앱으로 제작한 풀스택 프로젝트입니다.
