@@ -8,18 +8,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    
     imageUrl: {
       type: DataTypes.STRING(300),
       allowNull: true,
     },
-    
     desc: {
       type: DataTypes.STRING(300),
       allowNull: false,
     },
-    
- 
   });
   return review;
 };
