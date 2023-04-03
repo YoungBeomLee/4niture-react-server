@@ -30,13 +30,14 @@
 
     1. $ git clone https://github.com/naehyun25/4niture_server.git
     2. $ cd 4niture_server
-    3. $ npm use v.16.19.0
-    4. $ npm init
-    5. $ npm i nodemon
-    6. $ npm i multer
-    7. $ npm i sequelize
-    8. $ npm i sqlite3
-    9. $ npm start
+    3. $ npm init
+    4. $ npm install express
+    5. $ npm install cors
+    6. $ npm i nodemon
+    7. $ npm i multer
+    8. $ npm i sequelize
+    9. $ npm i sqlite3
+    10. $ npm start
 
 ## 구현 목록
 
