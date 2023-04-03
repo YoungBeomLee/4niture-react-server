@@ -139,7 +139,7 @@ app.post("/products", (req, res) => {
 //review upload page
 app.get("/reviews", (req, res) => {
   models.Review.findAll({
-    attributes: ["name", "productname", "imageUrl", "desc"],
+    attributes: ["name", "productname", "imageUrl", "desc","id"],
   })
     .then((result) => {
       res.send({ reviews: result });
@@ -149,6 +149,27 @@ app.get("/reviews", (req, res) => {
       res.status(500).send("에러가 발생했습니다");
     });
 });
+
+app.get("/reviews/:id", (req, res) => {
+  const params = req.params;
+  const { id } = params;
+  models.Review.findOne({
+    where: { id: id },
+  })
+    .then((result) => {
+      console.log(result);
+      res.send({
+        reviews: result,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send("상품조회시 에러가 발생 했습니다.");
+    });
+});
+
+
+
 app.post("/reviews", (req, res) => {
   const body = req.body;
   const { name, productname, imageUrl, desc } = body;
