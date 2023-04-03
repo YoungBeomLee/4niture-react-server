@@ -37,6 +37,8 @@
     7. $ npm i sequelize
     8. $ npm i sqlite3
     9. $ npm start
+    10. $ npm install express
+    11. $ npm install cors
 
 ## 구현 목록
 
