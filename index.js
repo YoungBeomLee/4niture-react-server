@@ -215,7 +215,7 @@ app.post("/purchase/:id", (req, res) => {
 });
 
 app.get("/banners", (req, res) => {
-  models.Review.findAll({
+  models.Banners.findAll({
     attributes: ["imageUrl","href" ],
   })
     .then((result) => {
