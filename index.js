@@ -230,7 +230,7 @@ app.post("/banners", (req, res) => {
   const body = req.body;
   const { imageUrl, href } = body;
   if (!imageUrl || !href ) {
-    res.send("모든 필드를 입력해주세요");
+    res.send("모든 필드를 입력해주세요.");
   }
   models.Banners.create({
     imageUrl,
