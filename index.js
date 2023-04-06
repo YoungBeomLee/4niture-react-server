@@ -232,7 +232,7 @@ app.post("/banners", (req, res) => {
   if (!imageUrl || !href ) {
     res.send("모든 필드를 입력해주세요");
   }
-  models.Review.create({
+  models.Banners.create({
     imageUrl,
     href,
     
