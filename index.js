@@ -170,6 +170,7 @@ app.get("/reviews/:id", (req, res) => {
 
 
 
+
 app.post("/reviews", (req, res) => {
   const body = req.body;
   const { name, productname, imageUrl, desc } = body;
@@ -210,6 +211,19 @@ app.post("/purchase/:id", (req, res) => {
     .catch((error) => {
       console.error(error);
       res.status(500).send("상품구매에 실패했습니다.");
+    });
+});
+
+app.get("/banners", (req, res) => {
+  models.Review.findAll({
+    attributes: ["imageUrl","href" ],
+  })
+    .then((result) => {
+      res.send({ banners: result });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("에러가 발생했습니다");
     });
 });
 
