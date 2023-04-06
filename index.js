@@ -226,6 +226,26 @@ app.get("/banners", (req, res) => {
       res.status(500).send("에러가 발생했습니다");
     });
 });
+app.post("/banners", (req, res) => {
+  const body = req.body;
+  const { imageUrl, href } = body;
+  if (!imageUrl || !href ) {
+    res.send("모든 필드를 입력해주세요");
+  }
+  models.Review.create({
+    imageUrl,
+    href,
+    
+  })
+    .then((result) => {
+      res.send({ result });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send("상품 업로드에 문제가 발생했습니다.");
+    });
+  //res.send({ body });
+});
 
 app.listen(port, () => {
   console.log("🚩4niture의 쇼핑몰 서버가 돌아가고 있습니다");
